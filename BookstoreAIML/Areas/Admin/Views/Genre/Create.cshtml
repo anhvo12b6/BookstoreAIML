@@ -1,0 +1,37 @@
+﻿@model BookstoreAIML.Models.GenreModel
+@{
+    var isCreate = Model.GenreID == 0;
+    ViewData["Title"] = isCreate ? "Thêm thể loại" : "Chỉnh sửa thể loại";
+    var actionName = isCreate ? "Create" : "Edit";
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="@actionName">
+    <div class="form-group">
+        <label asp-for="GenreName" class="control-label"></label>
+        <input asp-for="GenreName" class="form-control" />
+        <span asp-validation-for="GenreName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Trạng thái</label>
+        <select asp-for="status" class="form-control">
+            <option value="1">Hiện</option>
+            <option value="0">Ẩn</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

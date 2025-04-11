@@ -1,0 +1,48 @@
+﻿@model IPagedList<BookstoreAIML.Models.ProductViewModel>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Danh sách sách";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Thêm sách</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Tác giả</th>
+            <th>Thể loại</th>
+            <th>Giá</th>
+            <th>Tồn kho</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+                <td>@item.Genre?.GenreName</td>
+                <td>@item.Price.ToString("N0") ₫</td>
+                <td>@item.StockQuantity</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BookID">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger btn-sm">Xóa</a>
+                    <a asp-action="Details" asp-route-id="@item.BookID">Chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

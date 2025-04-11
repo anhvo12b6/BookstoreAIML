@@ -1,0 +1,40 @@
+<style >
+.main {
+    margin: 0 auto;
+    min-height: 320px;
+    padding: 0px;
+    text-align: left;
+}
+
+.book-box {
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+}
+
+    .book-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+.btn-light-blue {
+    background-color: #d8efff;
+    color: #0077b6;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-light-blue:hover {
+        background-color: #bee2fb;
+    }
+
+.book-title {
+    line-height: 1.4;
+    max-height: 2.8em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+</style >

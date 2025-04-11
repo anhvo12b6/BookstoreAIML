@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BookstoreAIML.Models.ViewModel.FeaturedBookVM>
+
+<section class="shop-section section-padding fix">
+    <div class="container">
+        <div class="section-title-area">
+            <div class="section-title mb- wow fadeInUp" data-wow-delay=".3s">
+                <h2>Bookle Top Books</h2>
+            </div>
+            <a href="/Product" class="theme-btn transparent-btn wow fadeInUp" data-wow-delay=".5s">
+                Khám phá nhiều hơn <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+        <div class="book-shop-wrapper">
+            <div class="container py-4">
+                <div class="row g-4">
+                    @foreach (var book in Model.Where(b => b.AverageRating > 3))
+                    {
+                        <div class="col-md-3 d-flex">
+                            <div class="shop-box-items d-flex flex-column w-100 border p-3 shadow-sm">
+                                <div class="text-center">
+                                    <img src="@book.CoverImageURL" alt="@book.Title" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+                                </div>
+                                <div class="shop-content mt-3">
+                                    <h5 class="text-truncate" title="@book.Title">@book.Title</h5>
+                                    <div>Tác giả: <strong></strong></div>
+                                    <div class="price text-danger fw-bold">Giá: @book.Price đ</div>
+                                    <div>Rating: @book.AverageRating</div>
+                                </div>
+                                <div class="mt-auto">
+                                    <a asp-action="Add" asp-controller="Cart" asp-route-id="@book.BookID" class="btn btn-primary w-100 mt-3">
+                                        <i class="fa-solid fa-cart-shopping me-2"></i> Add To Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+            <div class="cta-shop-box">
+                <h2 class="wow fadeInUp" data-wow-delay=".2s">Find Your Next Books!</h2>
+                <h6 class="wow fadeInUp" data-wow-delay=".4s">And get your 25% discount now!</h6>
+                <a href="/Product" class="theme-btn white-bg wow fadeInUp" data-wow-delay=".6s">
+                    Shop Now <i class="fa-solid fa-arrow-right-long"></i>
+                </a>
+                <div class="girl-shape">
+                    <img src="assets/img/girl-shape.png" alt="shape-img" />
+                </div>
+                <div class="circle-shape">
+                    <img src="assets/img/circle-shape.png" alt="shape-img" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+﻿@model BookstoreAIML.Models.GenreModel
+
+@{
+    ViewData["Title"] = "Xác nhận xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Bạn có chắc muốn xóa?</h2>
+<p>@Model.GenreName</p>
+
+<form asp-action="Delete" asp-route-id="@Model.GenreID" method="post">
+    <input type="hidden" asp-for="GenreID" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

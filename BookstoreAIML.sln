@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreAIML", "BookstoreAIML\BookstoreAIML.csproj", "{789B93BD-BE03-4F82-9482-AC25B6836BA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerBehaviorPrediction", "CustomerBehaviorPrediction\CustomerBehaviorPrediction.csproj", "{EC4A0A82-5E27-4CA6-9C0B-33381CEF68B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{789B93BD-BE03-4F82-9482-AC25B6836BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789B93BD-BE03-4F82-9482-AC25B6836BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789B93BD-BE03-4F82-9482-AC25B6836BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789B93BD-BE03-4F82-9482-AC25B6836BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4A0A82-5E27-4CA6-9C0B-33381CEF68B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4A0A82-5E27-4CA6-9C0B-33381CEF68B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4A0A82-5E27-4CA6-9C0B-33381CEF68B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4A0A82-5E27-4CA6-9C0B-33381CEF68B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D52FA64-036B-4F9D-B773-BF55DB956A5B}
+	EndGlobalSection
+EndGlobal

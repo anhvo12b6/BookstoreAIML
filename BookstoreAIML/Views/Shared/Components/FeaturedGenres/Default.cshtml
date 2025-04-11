@@ -1,0 +1,25 @@
+﻿@model List<BookstoreAIML.Models.ViewModel.FeaturedGenreVM>
+
+<div class="swiper book-catagories-slider">
+    <div class="swiper-wrapper">
+        @foreach (var genre in Model)
+        {
+            <div class="swiper-slide">
+                <div class="book-catagories-items">
+                    <div class="book-thumb">
+                        <img src="@genre.CoverImageURL" alt="@genre.GenreName" style="height: 200px; object-fit: cover;">
+                        <div class="circle-shape">
+                            <img src="/assets/img/book-categori/circle-shape.png" alt="@genre.GenreName">
+                        </div>
+                    </div>
+                    <div class="number">@genre.BookCount</div>
+                    <h3>
+                        <a asp-controller="Products" asp-action="Index" asp-route-genreId="@genre.GenreID">
+                            @genre.GenreName (@genre.BookCount)
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        }
+    </div>
+</div>

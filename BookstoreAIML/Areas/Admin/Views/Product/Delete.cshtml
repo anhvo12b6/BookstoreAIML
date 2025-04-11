@@ -1,0 +1,22 @@
+﻿@model BookstoreAIML.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Xóa sách";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Xác nhận xóa</h2>
+
+<h4>Bạn có chắc chắn muốn xóa sách này không?</h4>
+<div>
+    <h5><strong>@Model.Title</strong></h5>
+    <p>Tác giả: @Model.Author</p>
+    <p>Thể loại: @Model.Genre?.GenreName</p>
+    <p>Giá: @Model.Price VNĐ</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="BookID" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

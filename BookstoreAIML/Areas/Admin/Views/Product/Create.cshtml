@@ -1,0 +1,99 @@
+﻿@model BookstoreAIML.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = Model.BookID == 0 ? "Thêm sách" : "Chỉnh sửa sách";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Author" class="control-label"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ISBN" class="control-label"></label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublisherID" class="control-label"></label>
+        <input asp-for="PublisherID" class="form-control" />
+        <span asp-validation-for="PublisherID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublicationDate" class="control-label"></label>
+        <input asp-for="PublicationDate" class="form-control" type="date" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GenreID" class="control-label"></label>
+        <select asp-for="GenreID" class="form-control" asp-items="ViewBag.GenreID">
+            <option value="">-- Chọn thể loại --</option>
+        </select>
+        <span asp-validation-for="GenreID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Discount" class="control-label"></label>
+        <input asp-for="Discount" class="form-control" />
+        <span asp-validation-for="Discount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StockQuantity" class="control-label"></label>
+        <input asp-for="StockQuantity" class="form-control" />
+        <span asp-validation-for="StockQuantity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CoverImageURL" class="control-label"></label>
+        <input asp-for="CoverImageURL" class="form-control" />
+        <span asp-validation-for="CoverImageURL" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Pages" class="control-label"></label>
+        <input asp-for="Pages" class="form-control" />
+        <span asp-validation-for="Pages" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Language" class="control-label"></label>
+        <input asp-for="Language" class="form-control" />
+        <span asp-validation-for="Language" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

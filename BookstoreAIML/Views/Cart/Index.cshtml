@@ -1,0 +1,148 @@
+﻿﻿@using BookstoreAIML.Models.ViewModel;
+@model CartItemViewModel
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_LayoutPublich.cshtml";
+}
+
+<!-- Breadcumb Section Start -->
+<div class="breadcrumb-wrapper">
+    <div class="book1">
+        <img src="assets/img/hero/book1.png" alt="book">
+    </div>
+    <div class="book2">
+        <img src="assets/img/hero/book2.png" alt="book">
+    </div>
+    <div class="container">
+        <div class="page-heading">
+            <h1>Cart</h1>
+            <div class="page-header">
+                <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Cart Section Start -->
+<div class="cart-section section-padding">
+    <div class="container">
+        <div class="main-cart-wrapper">
+            <div class="row g-5">
+                <div class="col-xl-9">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                           <tbody>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr>
+            <td>
+                <span class="d-flex gap-3 align-items-center">
+                    <a href="@Url.Action("RemoveFromCart", "Cart", new { id = item.ProductId })" class="remove-icon">
+                        <img src="assets/img/icon/icon-9.svg" alt="Remove" width="20">
+                    </a>
+                    <span class="cart">
+                        <img src="@item.ImageUrl" alt="@item.ProductName" class="cart-img">
+                    </span>
+                    <span class="cart-title">@item.ProductName</span>
+                </span>
+            </td>
+            <td>
+               <span class="cart-price">@item.Price.ToString("#,##0 đ")</span>
+            </td>
+            <td>
+                <span class="quantity-basket">
+                    <span class="qty">
+                        <a href="@Url.Action("Decrease", "Cart", new { id = item.ProductId })" class="btn btn-sm btn-danger">−</a>
+                        <input type="number" name="quantity" min="1" value="@item.Quantity" readonly>
+                        <a href="@Url.Action("Increase", "Cart", new { id = item.ProductId })" class="btn btn-sm btn-success">+</a>
+                    </span>
+                </span>
+            </td>
+            <td>
+                <span class="subtotal-price">@Model.GrandTotal.ToString("#,##0 đ")</span>
+            </td>
+            <td>
+                <a href="@Url.Action("Remove", "Cart", new { id = item.ProductId })" class="btn btn-sm btn-warning">Xóa</a>
+            </td>
+            <td colspan="3">
+                <a class="btn btn-danger btn-sm" asp-action="Clear" asp-controller="Cart">Xóa tất cả</a>
+            </td>
+        </tr>
+    }
+</tbody>
+
+                        </table>
+                    </div>
+                    <div class="cart-wrapper-footer">
+                        <form>
+                            <div class="input-area">
+                                <input type="text" name="Coupon Code" id="CouponCode" placeholder="Coupon Code">
+                                <button type="submit" class="theme-btn">Apply</button>
+                            </div>
+                        </form>
+                        <a href="@Url.Action("Index", "Cart")" class="theme-btn">Update Cart</a>
+                    </div>
+                </div>
+
+                <!-- Cart Total -->
+                <div class="col-xl-3">
+                    <div class="table-responsive cart-total">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cart Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="d-flex gap-5 align-items-center justify-content-between">
+                                            <span class="sub-title">Subtotal:</span>
+                                            <span class="sub-price">@Model.GrandTotal.ToString("#,##0 đ")</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="d-flex gap-5 align-items-center  justify-content-between">
+                                            <span class="sub-title">Shipping:</span>
+                                            <span class="sub-text">Free</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="d-flex gap-5 align-items-center  justify-content-between">
+                                            <span class="sub-title">Total: </span>
+                                            <span class="sub-price sub-price-total">@Model.GrandTotal.ToString("#,##0 đ") </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @if (User.Identity ?.IsAuthenticated ?? false) {
+                            <a href="@Url.Action("Index", "Checkout")" class="theme-btn">Proceed to checkout</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

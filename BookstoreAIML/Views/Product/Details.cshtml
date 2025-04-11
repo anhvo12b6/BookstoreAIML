@@ -1,0 +1,302 @@
+﻿ @model BookstoreAIML.Models.ProductViewModel
+<!-- Breadcumb Section Start -->
+<div class="breadcrumb-wrapper">
+    <div class="book1">
+        <img src="~/assets/img/hero/book1.png" alt="book">
+    </div>
+    <div class="book2">
+        <img src="~/assets/img/hero/book2.png" alt="book">
+    </div>
+    <div class="container">
+        <div class="page-heading">
+            <h1>Chi tiết sách</h1>
+            <div class="page-header">
+                <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
+                    <li>
+                        <a asp-action ="Index" asp-controller="Home">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Products">
+                            Chi tiết sách
+                         </a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Details Section Start -->
+<section class="shop-details-section fix section-padding">
+    <div class="container">
+        <div class="shop-details-wrapper">
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="shop-details-image">
+                        <div class="tab-content">
+                            <div id="thumb1" class="tab-pane fade show active">
+                                <div class="shop-details-thumb">
+                                    <img src="@Model.CoverImageURL" alt="img">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="shop-details-content">
+                        <div class="title-wrapper">
+                            <h2>@Model.Title</h2>
+                            
+                        </div>
+                        <div class="star">
+                            <a asp-action="Detais" asp-controller="Product"> <i class="fas fa-star"></i></a>
+                            <a asp-action="Detais" asp-controller="Product"><i class="fas fa-star"></i></a>
+                            <a asp-action="Detais" asp-controller="Product"> <i class="fas fa-star"></i></a>
+                            <a asp-action="Detais" asp-controller="Product"><i class="fas fa-star"></i></a>
+                            <a asp-action="Detais" asp-controller="Product"><i class="fa-regular fa-star"></i></a>
+                            <span>Đánh giá </span>
+                        </div>
+                        <p>
+                            @Model.Description
+                        </p>
+                        <div class="price-list">
+                            <h3>@Model.Price</h3>
+                        </div>
+                        <div class="cart-wrapper">
+                            <div class="quantity-basket">
+                                <p class="qty">
+                                    <button class="qtyminus" aria-hidden="true">−</button>
+                                    <input type="number" name="quantity" id="qty2" min="1" max="10" step="1" value="1">
+                                    <button class="qtyplus" aria-hidden="true">+</button>
+                                </p>
+                            </div>
+                            <form asp-action="Add" asp-controller="Cart" asp-route-id="@Model.BookID">
+                                <a asp-action="Add" asp-controller="Cart" asp-route-id="@Model.BookID">
+                                    <i class="fa-solid fa-basket-shopping"></i> Thêm vào giỏ hàng
+                                </a>
+
+                            </form>
+                            <div class="icon-box">
+                                <a href="shop-details.html" class="icon">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                                <a href="shop-details.html" class="icon-2">
+                                    <img src="~/assets/img/icon/shuffle.svg" alt="svg-icon">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="category-box">
+                            <div class="category-list">
+                                <ul>
+                                    <li>
+                                        <span>SKU:</span> @Model.BookID
+                                    </li>
+                                    <li>
+                                        <span>Danh mục:</span>@Model.Genre?.GenreName
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <span>Số trang:</span> @Model.Pages
+                                    </li>
+                                    <li>
+                                        <span>Ngôn ngữ:</span> @Model.Language
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <span>Số lượng:</span> @Model.StockQuantity
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box-check">
+                            <div class="check-list">
+                                <ul>
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Miễn phí vận chuyển
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Đổi trả trong vòng 30 ngày
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Giảm giá Flash Mamaya: Bắt đầu từ mức giảm giá 30%
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>
+                                        Mua sắm trực tuyến an toàn và bảo mật
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="social-icon">
+                            <h6>Also Available On:</h6>
+                            <a href="https://www.customer.io/"><img src="~/assets/img/cutomerio.png" alt="cutomer.io"></a>
+                            <a href="https://www.amazon.com/"><img src="~/assets/img/amazon.png" alt="amazon"></a>
+                            <a href="https://www.dropbox.com/"><img src="~/assets/img/dropbox.png" alt="dropbox"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-tab section-padding pb-0">
+                <ul class="nav mb-5" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="#description" data-bs-toggle="tab" class="nav-link ps-0 active"
+                           aria-selected="true" role="tab">
+                            <h6>Mô tả sản phẩm </h6>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#additional" data-bs-toggle="tab" class="nav-link" aria-selected="false"
+                           tabindex="-1" role="tab">
+                            <h6>Thông tin chi tiết </h6>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#review" data-bs-toggle="tab" class="nav-link" aria-selected="false" tabindex="-1"
+                           role="tab">
+                            <h6>reviews (3)</h6>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="description" class="tab-pane fade show active" role="tabpanel">
+                        <div class="description-items">
+                            <p>
+                                @Model.Description
+                            </p>
+                        </div>
+                    </div>
+                    <div id="additional" class="tab-pane fade" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-1">Sẵn có</td>
+                                        <td class="text-2">Có sẵn</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Danh mục</td>
+                                        <td class="text-2">@Model.Genre.GenreName</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Ngày xuất bản</td>
+                                        <td class="text-2">2022-10-24</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Số trang</td>
+                                        <td class="text-2">@Model.Pages</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Ngôn ngữ </td>
+                                        <td class="text-2">@Model.Language</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Kích thước</td>
+                                        <td class="text-2">30 × 32 × 46 Inches</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-1">Cân nặng</td>
+                                        <td class="text-2">2.5 Pounds</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="review" class="tab-pane fade" role="tabpanel">
+                        <div class="review-items">
+                            <div class="review-wrap-area d-flex gap-4">
+                                <div class="review-thumb">
+                                    <img src="~/assets/img/shop-details/review.png" alt="img">
+                                </div>
+                                <div class="review-content">
+                                    <div class="head-area d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                                        <div class="cont">
+                                            <h5><a href="news-details.html">Leslie Alexander</a></h5>
+                                            <span>February 10, 2024 at 2:37 pm</span>
+                                        </div>
+                                        <div class="star">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mt-30 mb-4">
+                                        Neque porro est qui dolorem ipsum quia quaed inventor veritatis et quasi
+                                        architecto var sed efficitur turpis gilla sed sit amet finibus eros. Lorem
+                                        Ipsum is <br> simply dummy
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="review-title mt-5 py-15 mb-30">
+                                <h4>Đánh giá của bạn*</h4>
+                                <div class="rate-now d-flex align-items-center">
+                                    <p>Đánh giá của bạn*</p>
+                                    <div class="star">
+                                        <i class="fa-light fa-star"></i>
+                                        <i class="fa-light fa-star"></i>
+                                        <i class="fa-light fa-star"></i>
+                                        <i class="fa-light fa-star"></i>
+                                        <i class="fa-light fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-form">
+                                <form action="#" id="contact-form" method="POST">
+                                    <div class="row g-4">
+                                        <div class="col-lg-6">
+                                            <div class="form-clt">
+                                                <span>Tên bạn*</span>
+                                                <input type="text" name="name" id="name" placeholder="Your Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-clt">
+                                                <span>Email*</span>
+                                                <input type="text" name="email" id="email" placeholder="Your Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 wow fadeInUp animated" data-wow-delay=".8">
+                                            <div class="form-clt">
+                                                <span>Lời nhắn*</span>
+                                                <textarea name="message" id="message"
+                                                          placeholder="Write Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 wow fadeInUp animated" data-wow-delay=".9">
+                                            <div class="form-check d-flex gap-2 from-customradio">
+                                                <input type="checkbox" class="form-check-input"
+                                                       name="flexRadioDefault" id="flexRadioDefault12">
+                                                <label class="form-check-label" for="flexRadioDefault12">
+                                                    tôi chấp nhận các điều khoản và điều kiện của bạn
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="theme-btn">
+                                                Gửi ngay bây giờ
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("FeaturedBooks")

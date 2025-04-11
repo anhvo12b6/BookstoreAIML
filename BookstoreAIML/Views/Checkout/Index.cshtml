@@ -1,0 +1,161 @@
+﻿@using BookstoreAIML.Models.ViewModel;
+@model CartItemViewModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_LayoutPublich.cshtml";
+}
+
+<!-- Breadcumb Section Start -->
+<div class="breadcrumb-wrapper">
+    <div class="book1">
+        <img src="~/assets/img/hero/book1.png" alt="book">
+    </div>
+    <div class="book2">
+        <img src="~/assets/img/hero/book2.png" alt="book">
+    </div>
+    <div class="container">
+        <div class="page-heading">
+            <h1>Checkout</h1>
+            <div class="page-header">
+                <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
+                    <li>
+                        <a asp-action="Index" asp-controller="Home">Trang chủ</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Checkout">Thanh toán</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout Section Start -->
+<section class="checkout-section fix section-padding">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-9">
+                <form asp-action="Index" asp-controller="Checkout" method="post">
+                    <div class="checkout-single-wrapper">
+                        <div class="checkout-single boxshado-single">
+                            <h4>Chi tiết đơn hàng </h4>
+                            <div class="checkout-single-form">
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="input-single">
+                                            <span>Tên</span>
+                                            <input type="text" name="FirstName" required placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-single">
+                                            <span>Họ</span>
+                                            <input type="text" name="LastName" required placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-single">
+                                            <span>Thành phố</span>
+                                            <input name="City" placeholder="Tên thành phố">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-single">
+                                            <span>Địa chỉ</span>
+                                            <input name="Address" placeholder="Số nhà, tên đường, khu vực...">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-single">
+                                            <span>Điện thoại</span>
+                                            <input name="Phone" placeholder="Số điện thoại">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-single">
+                                            <span>Email</span>
+                                            <input name="Email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-check payment-save">
+                                            <input type="checkbox" class="form-check-input" name="SaveForNext" id="saveForNext">
+                                            <label for="saveForNext">Lưu cho lần thanh toán tiếp theo</label>
+                                        </div>
+                                        <div class="input-check payment-save style-2">
+                                            <input type="checkbox" class="form-check-input" name="DifferentAddress" id="differentAddress">
+                                            <label for="differentAddress">Giao đến địa chỉ khác?</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-single">
+                                            <span>Ghi chú đơn hàng (không bắt buộc)</span>
+                                            <textarea name="Notes" placeholder="Ghi chú đặc biệt khi giao hàng..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button asp-action ="Checkout" asp-controller="Checkout">Đặt hàng</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Cart Total -->
+            <div class="col-xl-3">
+                <div class="table-responsive cart-total">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Cart Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="d-flex gap-5 align-items-center justify-content-between">
+                                        <span class="sub-title">Subtotal:</span>
+                                        <span class="sub-price">@Model.GrandTotal.ToString("#,##0 đ")</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="d-flex gap-5 align-items-center  justify-content-between">
+                                        <span class="sub-title">Shipping:</span>
+                                        <span class="sub-text">Free</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="d-flex gap-5 align-items-center  justify-content-between">
+                                        <span class="sub-title">Total: </span>
+                                        <span class="sub-price sub-price-total">@Model.GrandTotal.ToString("#,##0 đ") </span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a href="@Url.Action("Index", "Checkout")" class="theme-btn">Tiến hành đặt hàng</a>
+                    }
+                </div>
+                <div class="text-cen mt-4">
+                    <form method="POST" asp-action="CreatePaymentUrl" asp-controller="Payment">
+                        <input type="hidden" name="Name" value="@User.Identity.Name" />
+                        <input type="hidden" name="Amount" value="@Convert.ToInt32(Model.GrandTotal)" />
+                        <input type="hidden" name="OrderType" value="other" />
+                        <input type="hidden" name="OrderDescription" value="Thanh toán đơn hàng tại BookStore" />
+                        <button class="btn btn-success" type="submit">Pay with Vnpay</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,407 @@
+﻿{
+  "Scenario": "Classification",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "D:\\customer_behavior_1000.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Age",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Gender",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "TotalPageViews",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "TimeOnSite",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "PreviousPurchases",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "FavoriteCategory",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "WillBuy",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.50269696740284975,
+        "RuntimeInSeconds": 0.692,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnNames": [
+              "Gender"
+            ],
+            "InputColumnNames": [
+              "Gender"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ],
+            "InputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "FavoriteCategory",
+            "OutputColumnName": "FavoriteCategory"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Gender",
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases",
+              "FavoriteCategory"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 20,
+            "NumberOfTrees": 8,
+            "MaximumBinCountPerFeature": 301,
+            "FeatureFraction": 0.99999999,
+            "LearningRate": 0.046013516569382941,
+            "LabelColumnName": "WillBuy",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.50245929657694366,
+        "RuntimeInSeconds": 1.122,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnNames": [
+              "Gender"
+            ],
+            "InputColumnNames": [
+              "Gender"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ],
+            "InputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "FavoriteCategory",
+            "OutputColumnName": "FavoriteCategory"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Gender",
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases",
+              "FavoriteCategory"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 20,
+            "NumberOfTrees": 4,
+            "MaximumBinCountPerFeature": 254,
+            "FeatureFraction": 1.0,
+            "LearningRate": 0.099999999999999978,
+            "LabelColumnName": "WillBuy",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LightGbmBinary",
+        "Score": 0.50201427554368716,
+        "RuntimeInSeconds": 1.688,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Gender"
+            ],
+            "InputColumnNames": [
+              "Gender"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ],
+            "InputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "FavoriteCategory",
+            "OutputColumnName": "FavoriteCategory"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Gender",
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases",
+              "FavoriteCategory"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfLeaves": 324,
+            "MinimumExampleCountPerLeaf": 23,
+            "LearningRate": 0.59397272697247461,
+            "NumberOfTrees": 181,
+            "SubsampleFraction": 0.21423358902135131,
+            "MaximumBinCountPerFeature": 236,
+            "FeatureFraction": 0.99999999,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 0.99999977667298645,
+            "LabelColumnName": "WillBuy",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.48524620877562052,
+        "RuntimeInSeconds": 0.563,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e4",
+          "e0": {
+            "OutputColumnNames": [
+              "Gender"
+            ],
+            "InputColumnNames": [
+              "Gender"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ],
+            "InputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "FavoriteCategory",
+            "OutputColumnName": "FavoriteCategory"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Gender",
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases",
+              "FavoriteCategory"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 6,
+            "MinimumExampleCountPerLeaf": 21,
+            "NumberOfTrees": 4,
+            "MaximumBinCountPerFeature": 219,
+            "FeatureFraction": 0.922821755774066,
+            "LearningRate": 0.025745572508924452,
+            "LabelColumnName": "WillBuy",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LightGbmBinary",
+        "Score": 0.48446165799106977,
+        "RuntimeInSeconds": 0.825,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Gender"
+            ],
+            "InputColumnNames": [
+              "Gender"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ],
+            "InputColumnNames": [
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "FavoriteCategory",
+            "OutputColumnName": "FavoriteCategory"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Gender",
+              "Age",
+              "TotalPageViews",
+              "TimeOnSite",
+              "PreviousPurchases",
+              "FavoriteCategory"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 20,
+            "LearningRate": 1.0,
+            "NumberOfTrees": 4,
+            "SubsampleFraction": 1.0,
+            "MaximumBinCountPerFeature": 254,
+            "FeatureFraction": 1.0,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 1.0,
+            "LabelColumnName": "WillBuy",
+            "FeatureColumnName": "Features"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "OneHotEncoding",
+      "e1": "ReplaceMissingValues",
+      "e2": "FeaturizeText",
+      "e3": "Concatenate",
+      "e4": "FastTreeBinary",
+      "e5": "LightGbmBinary",
+      "e6": "LbfgsLogisticRegressionBinary",
+      "e7": "SdcaLogisticRegressionBinary",
+      "e8": "FastForestBinary",
+      "e9": "Naive"
+    },
+    "Schema": "e0 * e1 * e2 * e3 * (e4 + e5 + e6 + e7 + e8 * e9)",
+    "MetricName": "Accuracy",
+    "ModelFilePath": "D:\\Hoctap\\4thyear\\Project\\BookstoreAIML\\test\\MLModel.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 10,
+    "LabelColumn": "WillBuy",
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}

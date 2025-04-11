@@ -1,0 +1,223 @@
+﻿@model IEnumerable<BookstoreAIML.Models.ProductViewModel>
+<!-- Breadcumb Section Start -->
+<div class="breadcrumb-wrapper">
+    <div class="book1">
+        <img src="~/assets/img/hero/book1.png" alt="book">
+    </div>
+    <div class="book2">
+        <img src="~/assets/img/hero/book2.png" alt="book">
+    </div>
+    <div class="container">
+        <div class="page-heading">
+            <h1>Shop Default</h1>
+            <div class="page-header">
+                <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        Shop Default
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Section Start -->
+<section class="shop-section fix section-padding">
+    <div class="container">
+        <div class="shop-default-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="woocommerce-notices-wrapper wow fadeInUp" data-wow-delay=".3s">
+                        <p>Showing 1-3 Of 34 Results </p>
+                        <div class="form-clt">
+                            <div class="nice-select" tabindex="0">
+                                <span class="current">
+                                    Default Sorting
+                                </span>
+                                <ul class="list">
+                                    <li data-value="1" class="option selected focus">
+                                        Default sorting
+                                    </li>
+                                    <li data-value="1" class="option">
+                                        Sort by popularity
+                                    </li>
+                                    <li data-value="1" class="option">
+                                        Sort by average rating
+                                    </li>
+                                    <li data-value="1" class="option">
+                                        Sort by latest
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="icon">
+                                <a href="shop-list.html"><i class="fas fa-list"></i></a>
+                            </div>
+                            <div class="icon-2 active">
+                                <a href="shop.html"><i class="fa-sharp fa-regular fa-grid-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 order-2 order-md-1 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="main-sidebar">
+                        <div class="single-sidebar-widget">
+                            <div class="wid-title">
+                                <h5>Search</h5>
+                            </div>
+                            <form action="#" class="search-toggle-box">
+                                <div class="input-area search-container">
+                                    <input class="search-input" type="text" placeholder="Search here">
+                                    <button class="cmn-btn search-icon">
+                                        <i class="far fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <vc:categories></vc:categories>
+                        <form method="get" asp-action="Index" asp-controller="Product">
+                            <div class="single-sidebar-widget mb-50">
+                                <div class="wid-title">
+                                    <h5>Lọc theo giá</h5>
+                                </div>
+
+                                <!-- Range input ẩn -->
+                                <div class="range-input d-none">
+                                    <input type="range" name="minPrice" class="range-min" min="0" max="1000000" step="10000"
+                                           value="@Context.Request.Query["minPrice"]">
+                                    <input type="range" name="maxPrice" class="range-max" min="1000" max="1000000" step="10000"
+                                           value="@Context.Request.Query["maxPrice"]">
+                                </div>
+
+                                <!-- Ô nhập giá -->
+                                <div class="range-items mt-2">
+                                    <div class="price-input">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span>₫</span>
+                                            <input type="number" name="minPrice" class="input-min form-control form-control-sm"
+                                                   value="@Context.Request.Query["maxPrice"]" placeholder="Tối thiểu" style="max-width: 100px;">
+                                            <span>-</span>
+                                            <input type="number" name="maxPrice" class="input-max form-control form-control-sm"
+                                                   value="@Context.Request.Query["minPrice"]" placeholder="Tối đa" style="max-width: 100px;">
+                                            <button type="submit" class="btn btn-outline-primary btn-sm ms-2">Lọc</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 order-1 order-md-2">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-arts" role="tabpanel"
+                             aria-labelledby="pills-arts-tab" tabindex="0">
+
+                            <!-- Shop Container: chứa toàn bộ danh sách sách -->
+                            <div class="shop-container row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col wow fadeInUp" data-wow-delay=".2s">
+                                        <div class="shop-box-items h-100 d-flex flex-column justify-content-between">
+                                            <div class="book-thumb text-center position-relative">
+                                                <a asp-action="Details" asp-controller="Product" asp-route-id="@item.BookID">
+                                                    <img src="@item.CoverImageURL" alt="@item.Title" class="img-fluid">
+                                                </a>
+                                                <ul class="post-box position-absolute top-0 start-0 m-2">
+                                                    <li class="badge bg-danger text-white mb-1">Hot</li>
+                                                    <li class="badge bg-info text-white">@item.Discount%</li>
+                                                </ul>
+                                                <ul class="shop-icon d-flex justify-content-center gap-2 mt-2">
+                                                    <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                                    <li><a href="#"><img class="icon" src="~/assets/img/icon/shuffle.svg" alt="shuffle icon"></a></li>
+                                                    <li><a asp-action="Details" asp-controller="Product" asp-route-id="@item.BookID"><i class="far fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="shop-content d-flex flex-column flex-grow-1">
+                                                <h5 class="mt-3 text-truncate" title="@item.Title">@item.Title</h5>
+                                                <ul class="price-list list-unstyled small text-muted mt-auto">
+                                                    <li><strong>@String.Format("{0:N0}", item.Price)</strong> VND</li>
+                                                    <li>Tác giả: @item.Author</li>
+                                                </ul>
+                                                <div class="shop-button mt-2">
+                                                    <a asp-action="Add" asp-controller="Cart" asp-route-id="@item.BookID" class="btn btn-primary w-100">
+                                                        <i class="fa-solid fa-basket-shopping"></i> Thêm vào giỏ hàng
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!--Phân trang-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {}
+	<script> 
+		
+			$('.add-to-cart').click(function () {
+				var Id = $(this).data("product_id");
+
+				//alert(product_id);
+
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("Add","Cart")",
+					data: { Id: Id }, // Send data to the server
+
+					success: function (result) {
+						// Handle successful update
+						if (result) {
+
+							Swal.fire("Thêm giỏ hàng thành công.");
+						} 
+					}
+
+				});
+			});
+    <script>
+                        const rangeMin = document.querySelector(".range-min");
+                        const rangeMax = document.querySelector(".range-max");
+                        const inputMin = document.querySelector(".input-min");
+                        const inputMax = document.querySelector(".input-max");
+
+                        // Đồng bộ range -> input
+                        rangeMin.addEventListener("input", () => {
+                            inputMin.value = rangeMin.value;
+                        });
+
+                        rangeMax.addEventListener("input", () => {
+                            inputMax.value = rangeMax.value;
+                        });
+
+                        // Đồng bộ input -> range và kiểm tra hợp lệ
+                        inputMin.addEventListener("input", () => {
+                            let min = parseInt(inputMin.value);
+                            let max = parseInt(inputMax.value);
+                            if (min > max) min = max;
+                            rangeMin.value = min;
+                            inputMin.value = min;
+                        });
+
+                        inputMax.addEventListener("input", () => {
+                            let min = parseInt(inputMin.value);
+                            let max = parseInt(inputMax.value);
+                            if (max < min) max = min;
+                            rangeMax.value = max;
+                            inputMax.value = max;
+                        });
+</script>
+            		
+	</script>

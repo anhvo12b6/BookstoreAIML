@@ -1,0 +1,60 @@
+﻿@model List<BookstoreAIML.Models.ViewModel.RevenueStatViewModel>
+
+@{
+    ViewData["Title"] = "Thống kê doanh thu";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    <p><strong>Tổng doanh thu:</strong> @Model.Sum(x => x.Revenue).ToString("N0") đ</p>
+    <p><strong>Tổng đơn hàng hoàn tất:</strong> @Model.Sum(x => x.OrderCount)</p>
+
+    <canvas id="revenueChart" width="900" height="400"></canvas>
+
+    @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const labels = @Html.Raw(Json.Serialize(Model.Select(x => x.Date.ToString("dd/MM/yyyy"))));
+            const data = @Html.Raw(Json.Serialize(Model.Select(x => x.Revenue)));
+
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Doanh thu theo ngày',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toLocaleString('vi-VN') + ' đ';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+}
+else
+{
+    <p class="text-danger">Không có dữ liệu thống kê để hiển thị.</p>
+}
